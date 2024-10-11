@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Faça login</h1>
+    <form method="POST">
+        <label for="nome">Nome de usuário: </label>
+        <input type="text" name="nome">
+        <br>
+
+        <label for="senha">Senha: </label>
+        <input type="password" name="senha">
+        <br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% if not sl %}
+    <h2>Login mal sucedido. Usuário ou senha errados. Tente novamente.</h2>
+    {% endif %}
+</body>
+</html>

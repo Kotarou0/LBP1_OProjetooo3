@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template
 from models import m_1
 
-c = Blueprint('1', __name__)
+c = Blueprint('carros', __name__)
 
 @c.route('/carrinhos')
 def octane():

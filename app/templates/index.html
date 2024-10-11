@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
+    <h1>Bem-vindo {% if nome %}{{nome}}{% endif %}</h1>
+    {% if not nome %}
+    <p>Você não está logado.</p>
+    <a href="/login">Clique aqui para acessar a página de login.</a>
+    {% endif %}
 </body>
 </html>

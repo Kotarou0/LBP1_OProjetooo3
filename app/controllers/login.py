@@ -8,7 +8,10 @@ sucesso_login = True
 def login():
     global sucesso_login
     if request.method == 'GET':
-        return render_template('login.html', sl=sucesso_login)
+        if not cookies.existe('nome'):
+            return render_template('login.html', sl=sucesso_login)
+        else:
+            return redirect(url_for('index'))
     if request.method == 'POST':
         nome = request.form['nome']
         senha = request.form['senha']

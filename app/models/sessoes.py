@@ -1,6 +1,6 @@
 from flask import session
 
-CAMPOS_LOGIN = ['nome']
+CAMPOS_LOGIN = ['nome', 'tipo']
 
 def existe(campo):
     return campo in session
@@ -8,8 +8,8 @@ def existe(campo):
 def get(campo):
     return session[campo]
 
-def atualizar_login(nome):
-    session['nome'] = nome
+def atualizar_login(campo, valor):
+    session[campo] = valor
 
 def limpar_login():
     for campo in CAMPOS_LOGIN:

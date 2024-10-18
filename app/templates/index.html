@@ -6,10 +6,25 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Bem-vindo {% if nome %}{{nome}}{% endif %}</h1>
-    {% if not nome %}
-    <p>Você não está logado.</p>
-    <a href="/login">Clique aqui para acessar a página de login.</a>
-    {% endif %}
+    <h1>Bem-vindo {{nome}}</h1>
+    <h1>Lista de produtos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do produto</th>
+                <th>Preço</th>
+                <th>Adicionar ao carrinho</th>
+            </tr>
+        </thead>
+        <tbody>
+    {{% for p in produtos %}}
+            <tr>
+                <td>{{p.nome}}</td>
+                <td>{{p.preco}}</td>
+                <td><button type="submit"><a href="/carrinho/add?id={{p.id}}">Adicionar</a></button></td>
+            </tr>
+    {{% endfor %}}
+        </tbody>
+    </table>
 </body>
 </html>

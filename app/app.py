@@ -1,10 +1,11 @@
 from flask import Flask, render_template, session, request, redirect, url_for
-from controllers import login, admin
-from models import sessoes
+from controllers import login, admin, carrinho
+from models import sessoes, produtos
 
 app = Flask(__name__)
 app.register_blueprint(login.c)
 app.register_blueprint(admin.c)
+app.register_blueprint(carrinho.c)
 app.secret_key = 'senha super secreta'
 
 @app.errorhandler(404)
@@ -29,7 +30,7 @@ def a_request(response):
 
 @app.route('/')
 def index():
-    return render_template('index.html', nome=sessoes.get('nome'))
+    return render_template('index.html', nome=sessoes.get('nome'), produtos = produtos.LISTA_PRODUTOS)
 
 if __name__ == '__main__':
     app.run(debug=True)

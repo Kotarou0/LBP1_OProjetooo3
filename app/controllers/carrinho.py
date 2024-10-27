@@ -6,6 +6,22 @@ c = Blueprint('carrinho', __name__)
 @c.route('/carrinho/add') # type: ignore
 def add():
     id = request.args.get('id')
-    resp = make_response()
-    valor = 'oi'
-    resp.set_cookie(f'produto_{id}', valor)
+    resp = make_response(redirect(url_for('index')))
+    cookie = request.cookies.get(f'produto_{id}')
+    if cookie:
+        resp.set_cookie(f'produto_{id}', str(int(cookie)+1))
+    else:
+        resp.set_cookie(f'produto_{id}', "1")
+    return resp
+
+@c.route('/carrinho/del')
+def delete():
+    id = request.args.get('id')
+    resp = make_response(redirect(url_for('index')))
+    cookie = request.cookies.get(f'produto_{id}')
+    if cookie:
+        if int(cookie)-1 > 0:
+            resp.set_cookie(f'produto_{id}', str(int(cookie)-1))
+        else:
+            resp.set_cookie(f'produto_{id}', '0', expires=0)
+    return resp

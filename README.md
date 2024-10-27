@@ -2,7 +2,7 @@
 
 Desenvolvedores do projeto:
 * João Victor Santos
-* Renan Trajano da Conceição
+* Renan Trajano da Conceição (só o primeiro commit)
 
 ## Comandos
 

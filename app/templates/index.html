@@ -13,18 +13,26 @@
             <tr>
                 <th>Nome do produto</th>
                 <th>Preço</th>
-                <th>Adicionar ao carrinho</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
-    {{% for p in produtos %}}
+    {% for p in produtos %}
             <tr>
                 <td>{{p.nome}}</td>
                 <td>{{p.preco}}</td>
-                <td><button type="submit"><a href="/carrinho/add?id={{p.id}}">Adicionar</a></button></td>
+                <td><button type="submit"><a href="/carrinho/add?id={{p.id}}">+</a></button>
+                <button type="submit"><a href="/carrinho/del?id={{p.id}}">-</a></button></td>
             </tr>
-    {{% endfor %}}
+    {% endfor %}
         </tbody>
     </table>
+
+<h1>Carrinho</h1>
+    <ul>
+	{% for p in carrinho %}
+		<li>{{p.qntd}}x {{p.nome}}: {{p.total}}</li>
+	{% endfor %}
+    </ul>
 </body>
 </html>

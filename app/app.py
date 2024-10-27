@@ -30,7 +30,16 @@ def a_request(response):
 
 @app.route('/')
 def index():
-    return render_template('index.html', nome=sessoes.get('nome'), produtos = produtos.LISTA_PRODUTOS)
+    carr = []
+    for p in produtos.LISTA_PRODUTOS:
+        cookie = request.cookies.get(f'produto_{p.id}')
+        if cookie:
+            carr.append({
+                'nome': p.nome,
+                'qntd': cookie,
+                'total': int(cookie)*p.preco
+            })
+    return render_template('index.html', nome=sessoes.get('nome'), produtos = produtos.LISTA_PRODUTOS, carrinho=carr)
 
 if __name__ == '__main__':
     app.run(debug=True)

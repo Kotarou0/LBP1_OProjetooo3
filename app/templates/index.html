@@ -34,5 +34,16 @@
 		<li>{{p.qntd}}x {{p.nome}}: {{p.total}}</li>
 	{% endfor %}
     </ul>
+
+{% with messages = get_flashed_messages(with_categories=True) %}
+		{% if messages %}
+		<h1>Avisos</h1>
+		<ul>
+			{% for category, message in messages %}
+			<li class="{{ category }}">{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+{% endwith %}
 </body>
 </html>

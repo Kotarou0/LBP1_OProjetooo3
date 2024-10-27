@@ -1,15 +1,13 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash
 from models import usuarios, sessoes
 
 c = Blueprint('login', __name__)
-sucesso_login = True
 
 @c.route('/login', methods=['POST', 'GET']) # type: ignore
 def login():
-    global sucesso_login
     if request.method == 'GET':
         if not sessoes.existe('nome'):
-            return render_template('login.html', sl=sucesso_login)
+            return render_template('login.html')
         else:
             return redirect(url_for('index'))
     if request.method == 'POST':
@@ -18,12 +16,11 @@ def login():
 
         for u in usuarios.USUARIOS:
             if nome == u.nome and senha == u.senha:
-                sucesso_login = True
                 sessoes.atualizar_login('nome', nome)
                 sessoes.atualizar_login('tipo', u.tipo)
                 return redirect(url_for('index'))
-        
-        sucesso_login = False
+
+        flash('Credenciais incorretas.', 'warning')
         return redirect(url_for('login.login'))
 
 @c.route('/logout')

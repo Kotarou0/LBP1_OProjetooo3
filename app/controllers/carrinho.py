@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, make_response
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, make_response, flash
 from models import produtos
 
 c = Blueprint('carrinho', __name__)
@@ -24,4 +24,6 @@ def delete():
             resp.set_cookie(f'produto_{id}', str(int(cookie)-1))
         else:
             resp.set_cookie(f'produto_{id}', '0', expires=0)
+    else:
+        flash('O produto não está no carrinho para ser removido.', 'warning')
     return resp
